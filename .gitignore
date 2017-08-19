@@ -17,6 +17,7 @@
 *.zip
 *.tar.gz
 *.rar
+<<<<<<< HEAD
 .settings/
 .classpath
 .project
@@ -25,5 +26,8 @@
 =======
  	
 >>>>>>> c8aa943d4a746e22dffa00d35c932f9d84342efb
+=======
+
+>>>>>>> da9b9e880e6008332e51143cf1176c85147841c7
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
