@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-public class CountRepeateadLetters {
+public class CountRepeatedLetters {
 
 	public static void main(String[] args) {
 
