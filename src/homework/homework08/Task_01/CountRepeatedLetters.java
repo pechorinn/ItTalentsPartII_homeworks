@@ -18,11 +18,7 @@ public class CountRepeatedLetters {
 		for (int i = 0; i < string.length(); i++) {
 			Integer value = hashMap.get(string.charAt(i));
 			if (Character.isLetter(string.charAt(i))) {
-				if (value == null) {
-					hashMap.put(string.charAt(i), 1);
-				} else {
-					hashMap.put(string.charAt(i), value + 1);
-				}
+			 Integer insert = (value == null) ? hashMap.put(string.charAt(i), 1) : hashMap.put(string.charAt(i), value + 1);
 			}
 		}
 
