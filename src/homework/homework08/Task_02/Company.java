@@ -1,10 +1,11 @@
 package homework.homework08.Task_02;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
@@ -70,7 +71,8 @@ public class Company {
 		System.out.println("Employees sorted by salary amount ascending: ");
 		System.out.println("==============================================");
 
-		printSortedEmployees((Employee a1, Employee b1) -> Double.compare(a1.getSalary(), b1.getSalary()));
+		printSortedEmployees((Employee a1, Employee b1) -> a1.getSalary() == b1.getSalary() ? a1.getId() - b1.getId()
+				: Double.compare(a1.getSalary(), b1.getSalary()));
 	}
 
 	public void printSortedByNameAlphabetically() {
@@ -78,7 +80,8 @@ public class Company {
 		System.out.println("Employees sorted by name alphabetically: ");
 		System.out.println("==============================================");
 
-		printSortedEmployees((Employee a1, Employee b1) -> a1.getName().compareTo(b1.getName()));
+		printSortedEmployees(((Employee a1, Employee b1) -> a1.getName().equals(b1.getName())
+				? a1.getId() - b1.getId() : a1.getName().compareTo(b1.getName())));
 	}
 
 	public void printSortedByAge() {
@@ -86,36 +89,38 @@ public class Company {
 		System.out.println("Employees sorted by age: ");
 		System.out.println("==============================================");
 
-		printSortedEmployees((Employee a1, Employee b1) -> a1.getAge() - b1.getAge());
+		printSortedEmployees((Employee a1, Employee b1) -> a1.getAge() == b1.getAge() ? a1.getId() - b1.getId() : a1.getAge() - b1.getAge());
 	}
 
-	private ArrayList<Employee> getAllEmployeesSorted(HashMap<Department, Set<Employee>> employees,
+	private ArrayList<Employee> getAllEmployeesSorted(Map<Department, Set<Employee>> employees2,
 			Comparator<Employee> comparator) {
 
 		ArrayList<Employee> employee = new ArrayList<Employee>();
 
-		for (Entry<Department, Set<Employee>> entry : employees.entrySet()) {
+		for (Entry<Department, Set<Employee>> entry : employees2.entrySet()) {
 			Department dep = entry.getKey();
-			
-			for (Employee em : employees.get(dep)) {
+
+			for (Employee em : employees2.get(dep)) {
 				employee.add(em);
 			}
 		}
-		
+
 		employee.sort(comparator);
 		return employee;
 	}
 
-	public ArrayList<Employee> getAllEmployeesSortedByNames(HashMap<Department, Set<Employee>> employees) {
+	public ArrayList<Employee> getAllEmployeesSortedByNames(Map<Department, Set<Employee>> employees) {
 
-		ArrayList<Employee> arrayList = getAllEmployeesSorted(employees, ((Employee a1, Employee b1) -> a1.getName().compareTo(b1.getName())));
-        
+		ArrayList<Employee> arrayList = getAllEmployeesSorted(employees,
+				((Employee a1, Employee b1) -> a1.getName().equals(b1.getName()) ? a1.getId() - b1.getId()
+						: a1.getName().compareTo(b1.getName())));
+
 		return arrayList;
 	}
 
-	public HashMap<Department, Set<Employee>> getEmployees() {
+	public Map<Department, Set<Employee>> getEmployees() {
 
-		return employees;
+		return Collections.unmodifiableMap(employees);
 	}
 
 	public String getName() {

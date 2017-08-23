@@ -1,6 +1,11 @@
 package homework.homework08.Task_02;
 
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
 import java.util.Stack;
+
+import homework.homework08.Task_02.Employee.Months;
 
 public class Demo {
 	/*
@@ -16,6 +21,8 @@ public class Demo {
 	 */
 
 	public static void main(String[] args) {
+
+		Random rnd = new Random();
 
 		/*
 		 * Write a program that sorts the Employee objects in the company
@@ -43,9 +50,30 @@ public class Demo {
 		 * Employees. Duplicate employees have identical names and age.
 		 */
 
-		// it was achieved by using Set as value for a HashSet instead of ArrayList: -
+		// it was achieved by using Set as value for a HashSet instead of
+		// ArrayList: -
 		// "private HashMap<Department, Set<Employee>> employees;" and
 		// overriding HashCodes and Equals methods as applicable
+
+		/*
+		 * Add functionality that sets salaries for a particular month for each
+		 * Employee. Add a method that prints the salaries for each month
+		 */
+
+		for (Set<Employee> em : company.getEmployees().values()) {
+			for (Employee e : em) {
+				for (Entry<Months, Double> entry : e.getSalaryByMonth().entrySet()) {
+					Months month = entry.getKey();
+					e.setSalary(month, rnd.nextInt(1000) + 500);
+				}
+			}
+		}
+
+		for (Set<Employee> em : company.getEmployees().values()) {
+			for (Employee e : em) {
+				e.printSalariesByMonth();
+			}
+		}
 
 		/*
 		 * Write a program that reads a piece of programming code and tells if
@@ -54,10 +82,10 @@ public class Demo {
 		 * 
 		 */
 
-		String braces = "{{}}";
+		String braces = "{{}}{}}}{{";
 		Stack<Character> stack = new Stack<>();
 		boolean theBracesAreOk = true;
-			for (int i = 0; i < braces.length(); i++) {
+		for (int i = 0; i < braces.length(); i++) {
 			if (stack.isEmpty() && braces.charAt(i) == '}') {
 				theBracesAreOk = false;
 				break;
@@ -79,10 +107,6 @@ public class Demo {
 		} else {
 			System.out.println("One or more braces are missing.");
 		}
-		
-		if(theBracesAreOk) {
-				System.out.println("The braces provided are ok.");
-			}
 
 	}
 
