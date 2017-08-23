@@ -58,25 +58,29 @@ public class Demo {
 		Stack<Character> stack = new Stack<>();
 		boolean theBracesAreOk = true;
 			for (int i = 0; i < braces.length(); i++) {
-				if(stack.isEmpty() && braces.charAt(i) == '}') {
-					System.out.println("One or more braces are missing.");
-					theBracesAreOk = false;
-					break;
-				}
-				if(braces.charAt(i) == '{') {
-					stack.push('{');
-				}
-				if(stack.isEmpty()) {
-					System.out.println("One or more braces are missing.");
-					theBracesAreOk = false;
-					break;
-				}
-				if(braces.charAt(i) == '}') {
-					stack.pop();
-				}
+			if (stack.isEmpty() && braces.charAt(i) == '}') {
+				theBracesAreOk = false;
+				break;
 			}
+			if (braces.charAt(i) == '{') {
+				stack.push('{');
+			}
+			if (stack.isEmpty()) {
+				theBracesAreOk = false;
+				break;
+			}
+			if (braces.charAt(i) == '}') {
+				stack.pop();
+			}
+		}
+
+		if (theBracesAreOk && stack.isEmpty()) {
+			System.out.println("The braces provided are ok.");
+		} else {
+			System.out.println("One or more braces are missing.");
+		}
 		
-			if(theBracesAreOk) {
+		if(theBracesAreOk) {
 				System.out.println("The braces provided are ok.");
 			}
 
